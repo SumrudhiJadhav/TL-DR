@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <title>TL;DR</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+</head>
+    <body>
+        <section class="sub-header">
+            <nav>
+                <a href="index.html"><img src="images/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="home.html">HOME</a> </li>
+                        <li><a href="about.html">ABOUT</a></li>   
+                        <li><a href="summariser.html">SUMMARISER</a></li>
+                        <li><a href="blog.html">BLOG</a></li>
+                        <li><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+            <h1>General Statistics</h1>
+        </section>
+
+<!----Blog Page Content---->
+<section class="blog-content">
+    <div class="row">
+        <div class="blog-left">
+            <img src="images/statistics.png">
+            <h2>General Statistics</h2>
+            <p>14,500,000 people in America suffer from a learning disability.</p>
+            <br>
+            <p>Around 4 million kids in the US have learning disability.</p>
+            <br>
+            <p>One in five children have learning and attention issues.</p>
+            <br>
+            <p>Around 5-9% of the population has a learning disability.</p>
+            <div class="comment-box">
+                <h3>Leave a comment</h3>
+                <form class="comment-force">
+                    <input types="text" placeholder="Enter name">
+                    <input types="email" placeholder="Enter email">
+                    <textarea rows="5" placeholder="Your comment"></textarea>
+                    <button type="submit" class="hero-btn red-btn">POST COMMENT</button>
+                </form>
+            </div>   
+        
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!--------JavaScript for Toggle Menu------->
+        <script>
+            var navLinks = document.getElementsById("navLinks");
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+        </script>
+    </body>
+    </html>

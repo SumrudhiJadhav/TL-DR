@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta name="viewport" content="with=device-width, initial-scale=1.0">
+       <title>TL;DR</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+</head>
+    <body>
+        <section class="sub-header">
+            <nav>
+                <a href="index.html"><img src="images/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="home.html">HOME</a> </li>
+                        <li><a href="about.html">ABOUT</a></li>   
+                        <li><a href="summariser.html">SUMMARISER</a></li>
+                        <li><a href="blog.html">BLOG</a></li>
+                        <li><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+            <h1>Summariser</h1>
+        </section>
+
+<!----Summariser---->
+<section class="summariser">
+    <div class="row">
+        <div class="summariser-col">
+            <div>
+                <span>
+                    <h5>Enter Your Article and We'll Summarise It!</h5>
+                </span>
+             </div>
+             
+             <div class="summariser-col">
+                <form id="form1" action="#">
+                    <label for="input" placeholder="Place Your Text">Input text:</label><br>
+                    <textarea id="article" name="article" cols="40" rows="27"></textarea><br>
+                  </form> 
+
+                  <br>
+                <button id="btnSubmit" type="submit" form="form1" value="Submit" onclick="return onclickSummarise()">
+                Summarize input
+                </button>
+                <div name="summary" id="summary">Your Summary Will Appear Here</div>
+                    <!---- <textarea rows="47" name="article" placeholder="Paste Your Text" required></textarea>
+                     <button type="submit" class="hero-btn" onclick="onclickSummarise()">Submit</button>
+                     <div id="summary">Your Summary Will Appear Here</div>--->
+             </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!--------JavaScript for Toggle Menu------->
+        <script type = "text/javascript">
+            var navLinks = document.getElementById("nav-links");
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+
+            function onclickSummarise(){
+                 var input_text = document.getElementById("article").value;
+                 document.getElementById("summary").innerHTML = "Loading..";
+                 if(input_text == null || input_text == "") {
+                    document.getElementById("summary").innerHTML = "Please enter input text..";
+                    return false;
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "https://api.smmry.com/&SM_API_KEY=75AB9BF23A");
+                
+            xhr.onload = function (event) {
+                    //alert("Success, server responded with: " + event.target.response); // raw response
+                    //alert(input_text);
+                    //{"sm_api_error":1,"sm_api_message":"INSUFFICIENT VARIABLES"}
+                    var http_response = event.target.response;
+                    var http_response_json = JSON.parse(http_response);
+                    if(http_response_json.sm_api_error != null || http_response_json.sm_api_error != "") {
+                    document.getElementById("summary").innerHTML = "sm_api_error: " + http_response_json.sm_api_error;
+                    }
+                    if(http_response_json.sm_api_content != null || http_response_json.sm_api_content != "") {
+                        document.getElementById("summary").innerHTML =  http_response_json.sm_api_content;
+                    }
+                    return false;
+                
+            }
+            var formData=new FormData();
+                    formData.append('sm_api_input', encodeURI(input_text));
+                    xhr.send(formData);
+
+        }
+        </script>
+
+        
+    </body>
+    </html>
